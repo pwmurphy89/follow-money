@@ -16,13 +16,13 @@ const fillDomComponents = function() {
         pacDonations.forEach(pacArray => {
             pacArray.forEach(pac => {
                 $(`#pacs_${pac.politicianId}`).append(`<li>${pac.pac.name}</li>`)
-                $(`#pacs_${pac.politicianId}`).append(`<ul id="corps_${pac.politicianId}">Corps Associated with this PAC: </ul>`)
+                $(`#pacs_${pac.politicianId}`).append(`<ul id="corps_${pac.pacId}">Corps Associated with ${pac.pac.name}: </ul>`)
                 APIManager.getCorpsByPac(pac.pacId)
-                .then(corps => {
-                    corps.forEach(corp => {
-                         $(`#corps_${pac.politicianId}`).append(`<li>${corp.corp.name}</li>`)
+                .then(corpDonations => {
+                    corpDonations.forEach(corp => {
+                            $(`#corps_${pac.pacId}`).append(`<li>${corp.corp.name}</li>`)
+                        })
                     })
-                })
             })
         })
     })
